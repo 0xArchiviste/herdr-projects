@@ -19,7 +19,7 @@ Checked on 2026-09-23 in a scratch `hp-dev` session (herdr 0.9.1, macOS, Claude 
 | 4 | A Next number key reaches the thread and its task file; `s` stops a working thread; a settings edit reaches PROJECT.md; `X` asks first | Builder |
 | 5 | Resolving a merged thread leaves no worktree, branch or workspace and keeps `threads/<id>.md` and `library/<id>/`; an unmerged one keeps its branch and says so | Builder |
 | 5 | `sweep --dry-run` lists a planted orphan worktree and `sweep --yes` removes it; `archive` closes and hides, `unarchive` reopens | Builder |
-| 6 | A real pull request is polled; a review comment fires `pr-followup` and the thread fixes it; forwarding "Merge the PR" merges it; the merge resolves and cleans the thread | Builder (private scratch repo `eliasstravik/hp-pr-probe`) |
+| 6 | A real pull request is polled; a review comment fires `pr-followup` and the thread fixes it; forwarding "Merge the PR" merges it; the merge resolves and cleans the thread | Builder (a private scratch repository) |
 | 6 | A needs-you event gives one notification titled `<Project> · t-0009` with the request sound; `mute` silences it; the nudge waits for a minute of idle | Unit. Seeing the notification: client-witnessed |
 
 ## Before 0.2.0
@@ -40,7 +40,7 @@ scripts/dev-herdr pane read <pane>                   # read a pane; `pane send-k
 | --- | --- | --- |
 | 1 | `herdr plugin list` shows the plugin; after linking no ticker runs and `~/.herdr-projects` does not exist; `doctor --session hp-dev` reports the herdr version | Builder |
 | 2 | `new demo` creates the skeleton; `open demo --session hp-dev` yields a workspace in `hp-dev` only, with a coordinator that ran `skill` and printed the digest | Builder |
-| 2 | With an untrusted folder, `open` leaves `prime_pending = true`, and the ticker delivers the priming prompt after the dialog is accepted | Builder (folder moved under `/private/tmp` and symlinked, because `~/dev` is trusted) |
+| 2 | With an untrusted folder, `open` leaves `prime_pending = true`, and the ticker delivers the priming prompt after the dialog is accepted | Builder (folder moved under `/private/tmp` and symlinked, because the usual source folder is trusted) |
 | 2 | The printed `context` command works from a scrubbed environment | Builder and unit (`tests/cli.rs`) |
 | 2 | `ticker stop` ends the ticker within two ticks; `ticker start` after a rebuild replaces the old one | Builder (1 s; seen in `.ticker.log`) |
 | 3 | `thread start` on a scratch repo: branch `hp/demo/t-0001-*`, record `open`, brief with instructions and memory, report written with no out-of-directory prompt; `git status` shows nothing from `.herdr-project/` | Builder |

@@ -20,4 +20,4 @@ The repository is public and carries the `herdr-plugin` topic, so the Herdr mark
 ## Open
 
 - [ ] Verify `herdr plugin install eliasstravik/herdr-projects` from a clean machine: it clones, downloads the prebuilt binary, and registers the actions and popups.
-- [ ] `docs/herdr-notes.md` and `docs/manual-test.md` name the author's machines and home paths. Generalise them.
+- [x] `docs/herdr-notes.md` and `docs/manual-test.md` no longer name the author's machines, home paths or scratch repositories (generalised in the 0xArchiviste fork).
