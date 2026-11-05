@@ -1,7 +1,7 @@
 <p align="center"><img src="https://img.shields.io/badge/Herdr%20Projects-Projects%20for%20Herdr-2ea44f?style=flat-square&labelColor=24292f" alt="Herdr Projects | Projects for Herdr" /></p>
 
 > [!NOTE]
-> **0.2.35 is the last release of the Rust version of Herdr Projects.** A rewritten herdr-projects is coming as the next release. If you want to keep the Rust version, fork it from the [`legacy`](https://github.com/eliasstravik/herdr-projects/tree/legacy) branch or the [`v0.2.35`](https://github.com/eliasstravik/herdr-projects/releases/tag/v0.2.35) tag.
+> **Maintained fork of the Rust herdr-projects (0.2.x line); upstream became Shepherdr.** This fork tracks the last Rust release, [`v0.2.35`](https://github.com/eliasstravik/shepherdr/releases/tag/v0.2.35), from upstream's [`legacy`](https://github.com/eliasstravik/shepherdr/tree/legacy) branch. Original work by Elias Stravik under the MIT licence (see [LICENSE](LICENSE)). Do not run `herdr-projects update`: it would install Shepherdr from upstream.
 
 <h3 align="center">Run a whole project across your coding agents without handing each one its task or keeping track of who is doing what</h3>
 
