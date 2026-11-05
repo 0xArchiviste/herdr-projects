@@ -1,8 +1,8 @@
 #!/bin/sh
 # Puts the herdr-projects binary at target/release/herdr-projects.
 #
-# Herdr runs this as the plugin's build step, and `herdr-projects update` runs
-# it in a linked checkout. It downloads the prebuilt binary of the release
+# Herdr runs this as the plugin's build step (upstream's `herdr-projects update`
+# also ran it; this fork's `update` is disabled). It downloads the prebuilt binary of the release
 # named by herdr-plugin.toml's `version` for this machine, checks it against
 # the release's SHA256SUMS, and falls back to `cargo build --release --locked`
 # when there is no such binary or it cannot be verified. Then

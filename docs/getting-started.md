@@ -96,25 +96,21 @@ herdr-projects ticker status
 
 ## Updating
 
-**Once, if you're on 0.2.2 or older** (`herdr-projects --version`), which has no `update` yet:
+This fork does not self-update: `herdr-projects update` refuses and changes nothing, and `doctor` does not look for newer releases. Upstream's newest releases are Shepherdr, a different product, so never run `herdr plugin install eliasstravik/herdr-projects` or `herdr plugin update herdr-projects` either. herdr-dash will take over updates.
+
+To move a plugin checkout to a newer commit of this fork by hand:
 
 ```bash
+cd <plugin root>                         # the folder above target/release/herdr-projects
+git fetch https://github.com/0xArchiviste/herdr-projects.git legacy
+git checkout --detach FETCH_HEAD
+cargo build --release --locked           # or build elsewhere, copy it to target/release/.herdr-projects.new and rename it over
 herdr-projects ticker stop
-herdr plugin install eliasstravik/herdr-projects
-herdr-projects doctor --fix
 herdr-projects ticker start
+herdr-projects doctor
 ```
 
-Herdr reinstalls the plugin in the same folder, and the plugin keeps your `~/.local/bin/herdr-projects` link pointing at it. If you linked a local checkout with `herdr plugin link` instead, run `git pull` and `sh scripts/install.sh` in it in place of the `herdr plugin install` line.
-
-**From then on:**
-
-```bash
-herdr-projects update           # fetch, install the new binary, doctor --fix, restart the ticker
-herdr-projects update --check   # only print the installed and the newest version
-```
-
-`update` works for both install types and changes nothing when you're already on the newest release. Its `doctor --fix` also links the `autoproject` skill for each harness you configured, so existing users don't need to run `configure` again. A linked checkout must be on `main` with no uncommitted changes, or `update` stops and says why. When the install fails, the old version stays installed and the ticker is restarted. `doctor` says when a newer version is out.
+Keep a copy of the old `target/release/herdr-projects` first; putting it back and restarting the ticker is the rollback.
 
 ## Remove
 

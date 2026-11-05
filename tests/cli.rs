@@ -283,3 +283,14 @@ mod progress_hooks {
         }
     }
 }
+
+#[test]
+fn update_refuses_in_this_fork() {
+    let home = tempfile::tempdir().unwrap();
+    for args in [&["update"][..], &["update", "--check"][..]] {
+        let out = hp(home.path(), args);
+        assert!(!out.status.success());
+        let stderr = String::from_utf8_lossy(&out.stderr);
+        assert!(stderr.contains("this fork does not self-update; herdr-dash will take over updates"), "{stderr}");
+    }
+}

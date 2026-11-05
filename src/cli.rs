@@ -283,9 +283,9 @@ enum Command {
         #[arg(long, value_name = "ID")]
         pane: Option<String>,
     },
-    /// Update the plugin to the newest release: fetch, rebuild, `doctor --fix`, restart the ticker
+    /// Disabled in this fork: refuses and changes nothing (herdr-dash will take over updates)
     Update {
-        /// Print the installed and the newest version and change nothing
+        /// Refused too: this fork does not check for releases
         #[arg(long)]
         check: bool,
     },
