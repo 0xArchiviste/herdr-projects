@@ -85,9 +85,7 @@ fn report(
     let _ = writeln!(out, "config dir: {}", config_dir.display());
     let _ = writeln!(out);
 
-    if let Some(latest) = crate::update::newer_release(runner, crate::update::own_root().as_deref()) {
-        check(&mut out, None, "update", format!("a newer version is available ({latest}): run `herdr-projects update`"));
-    }
+    // No update check: this fork does not self-update (see `update.rs`).
 
     let bin = env.herdr_bin();
     match herdr::version(&bin, runner) {
@@ -385,7 +383,7 @@ fn report(
 
     // The bundled skill, linked where each installed harness looks for skills.
     // `--fix` links it only for a harness the user already ran `configure`
-    // for (its hooks or the link are journaled), so `update` alone brings a
+    // for (its hooks or the link are journaled), so `doctor --fix` alone brings a
     // newly bundled skill to existing users without a new opt-in.
     if let Some(source) = skill.map(Path::to_path_buf).filter(|s| s.join("SKILL.md").is_file()) {
         for agent in ["claude", "codex"] {
@@ -508,6 +506,19 @@ mod tests {
         assert!(!healthy);
         assert!(text.contains("[FAIL] herdr: 0.9.0"), "{text}");
         assert!(text.contains("0.9.1 or later"));
+    }
+
+    #[test]
+    fn doctor_neither_checks_for_nor_suggests_updates() {
+        let home = tempfile::tempdir().unwrap();
+        let env = Env::for_test(home.path(), &[]);
+        let runner = runner_with_herdr("herdr 0.9.3\n");
+        runner.on("ls-remote", ok("aaa\trefs/tags/v999.0.0\n"));
+        for fix in [false, true] {
+            let (text, _) = report(&env, &home.path().join("root"), &home.path().join("cfg"), &SessionFlags::default(), &runner, fix, None);
+            assert!(!text.contains("herdr-projects update") && !text.contains("newer version"), "{text}");
+        }
+        assert_eq!(runner.count("ls-remote"), 0);
     }
 
     #[test]

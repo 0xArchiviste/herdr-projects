@@ -127,7 +127,7 @@ pub fn resolve_profile(runner: &dyn Runner, target: &str, machine: &str, name: O
     if !out.success() {
         let error = out.error_text();
         if error.contains("unrecognized subcommand") || error.contains("not found") && error.contains("herdr-projects") {
-            bail!("herdr-projects on `{machine}` cannot resolve profiles; run `herdr-projects update` there: {}", error.trim());
+            bail!("herdr-projects on `{machine}` cannot resolve profiles; install a herdr-projects build with `profile resolve` there (this fork does not self-update): {}", error.trim());
         }
         bail!("`{machine}`: {}", error.trim());
     }
@@ -431,7 +431,7 @@ mod tests {
         assert!(resolve_profile(&runner, "me@m1", "m1", Some("gone")).unwrap_err().to_string().contains("no profile `gone`"));
         let old = FakeRunner::new();
         old.on("ssh", fail(2, "error: unrecognized subcommand 'resolve'"));
-        assert!(resolve_profile(&old, "me@m1", "m1", None).unwrap_err().to_string().contains("herdr-projects update"));
+        assert!(resolve_profile(&old, "me@m1", "m1", None).unwrap_err().to_string().contains("install a herdr-projects build with `profile resolve` there"));
     }
 
     #[test]
